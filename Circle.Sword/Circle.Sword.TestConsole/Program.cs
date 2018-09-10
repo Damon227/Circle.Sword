@@ -14,7 +14,7 @@ namespace Circle.Sword.TestConsole
         {
             try
             {
-                string connectionString = "Data Source=kc-fengniaowu-dev.database.chinacloudapi.cn;Initial Catalog=KC.Fengniaowu.Talos-Dev-Local;Integrated Security=False;User ID=KC;Password=V245ZGxbEhn3Sakk;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                string connectionString = "Data Source=.;Initial Catalog=Damon-Dev;Integrated Security=False;User ID=sa;Password=sasa;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
                 IDbConnection connection = new SqlConnection(connectionString);
 
@@ -40,7 +40,7 @@ namespace Circle.Sword.TestConsole
 
                 IEnumerable<Teacher> teachers = new List<Teacher> { teacher, teacher2 };
 
-                //await connection.InsertAsync(teacher);
+                await connection.InsertAsync(teacher);
                 //IEnumerable<Teacher> result = await connection.QueryAsync<Teacher>("Name='李老师'","Id DESC");
                 //await connection.InsertAsync(teachers);
 
