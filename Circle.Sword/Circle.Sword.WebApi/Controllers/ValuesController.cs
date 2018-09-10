@@ -15,6 +15,8 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using IdentityModel.Client;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MimeTypes;
@@ -43,28 +45,23 @@ namespace WebApi.Controllers
 
             //return File(stream, MimeTypeMap.GetMimeType(Path.GetExtension(path)), Path.GetFileName(path));
             return File(stream, "application/octet-stream", "蜂鸟管家测试版 Setup 5.1.2.exe");
+        }
 
-            //HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            //response.Content = new StreamContent(stream);
-            //response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-            //response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-            //{
-            //    FileName = "test.zip"
-            //};
+        [HttpPost, Route("Login/{userName}")]
+        public async Task<IActionResult> Login(string userName, [FromBody] string password)
+        {
+            DiscoveryResponse dis = await DiscoveryClient.GetAsync("http://localhost:5000");
 
+            //请求令牌
+            TokenClient tokenClient = new TokenClient(dis.TokenEndpoint, "Circle.Sword.ClientId.Password", "secret");
+            TokenResponse tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync(userName, password, "Circle.Sword.Scope");
 
-            //return response;
-
-            //HttpContext.Response.Headers["content-disposition"] = "attachment; filename=test.xlsx";
-            //Response.ContentType = "application/vnd.ms-excel";
-            //byte[] bytes = System.IO.File.ReadAllBytes(path);
-            //FileContentResult file = File(bytes, "application/vnd.ms-excel");
-
-            //return file;
+            return Ok(tokenResponse);
         }
 
         // GET api/values
         [HttpGet]
+        [Authorize(Policy = "Check")]
         public IEnumerable<string> Get()
         {
             return new[] { "value1", "value2" };

@@ -36,5 +36,15 @@ namespace Circle.Sword.Domain.Identity.Interface
         ///     邮箱，可用于登录
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        ///     角色
+        /// </summary>
+        public string Roles { get; set; }
+
+        /// <summary>
+        ///     权限
+        /// </summary>
+        public string Permissions { get; set; }
     }
 }

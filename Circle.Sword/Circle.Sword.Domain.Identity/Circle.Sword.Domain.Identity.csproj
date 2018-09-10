@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Circle.Sword.Domain.Foundation\Circle.Sword.Domain.Foundation.csproj" />
     <ProjectReference Include="..\Circle.Sword.Domain.Identity.Interface\Circle.Sword.Domain.Identity.Interface.csproj" />
+    <ProjectReference Include="..\Circle.Sword.Infrastructure.DapperExtensions\Circle.Sword.Infrastructure.DapperExtensions.csproj" />
   </ItemGroup>
 
 </Project>

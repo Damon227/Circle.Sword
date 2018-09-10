@@ -8,17 +8,18 @@
 // </copyright>
 // ***********************************************************************
 
+using System;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
 namespace Damon.Domain.Foundation
 {
-    public class DapperExtensions
+    public static class DbConnectionExtensions
     {
-        public static IDbConnection GetConnection()
+        public static IDbConnection GetConnection(DataOptions dataOptions)
         {
-            return new SqlConnection();
+            return new SqlConnection(dataOptions.SqlServerConnectionString);
         }
     }
 }
